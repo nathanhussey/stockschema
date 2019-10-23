@@ -1,4 +1,4 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+StockSchema is a web app designed to visualize financial data. With the goal of offering clarity to the financial standings of publicly traded companies.   
 
 ## Available Scripts
 
