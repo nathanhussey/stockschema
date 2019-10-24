@@ -28,7 +28,7 @@ const Homepage = () => {
       "PFE"
     ];
     fetch(
-      `https://sandbox.iexapis.com/stable/stock/market/batch?symbols=${tickers}&types=logo,price,company,stats,chart&range=5d&token=${process.env.REACT_APP_IEX_TOKEN}`
+      `https://sandbox.iexapis.com/stable/stock/market/batch?symbols=${tickers}&types=logo,price,company,stats,volume-by-venue,chart&range=5d&token=${process.env.REACT_APP_IEX_TOKEN}`
     )
       .then(response => response.json())
       .then(data => {
