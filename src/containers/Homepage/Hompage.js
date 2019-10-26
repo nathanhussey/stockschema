@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import StockCardList from "../../components/stockCardList/StockCardList";
+import styled from "styled-components";
 
 const Homepage = () => {
   const [stockList, setStockList] = useState([]);

@@ -8,6 +8,13 @@ const StockCardList = ({ stockList }) => {
     let priceChangePercentage = `${roundedPriceChange}%`;
     return priceChangePercentage;
   };
+  const createChartData = chartArray => {
+    let data = [];
+    chartArray.forEach((element, i) => {
+      data.push({ x: i, y: element.close });
+    });
+    return data;
+  };
 
   const formatNum = num => {
     let arrayStr = num
@@ -17,6 +24,8 @@ const StockCardList = ({ stockList }) => {
     let letterPosition = 0;
     const newArrayStr = arrayStr.map((letter, i) => {
       if (arrayStr.length - 1 === i) {
+      } else if (letter === ".") {
+        letterPosition = 0;
       } else if (letterPosition === 2) {
         letterPosition = 0;
         letter = `,${letter}`;
@@ -39,12 +48,13 @@ const StockCardList = ({ stockList }) => {
             logo={stock.logo}
             name={stock.company.companyName}
             marketCap={formatNum(stock.stats.marketcap)}
-            price={stock.price}
+            price={formatNum(stock.price)}
             volume={formatNum(stock.chart[4].uVolume)}
             priceChange={calculatePriceChange(
               stock.price,
               stock.chart[4].close
             )}
+            graph={createChartData(stock.chart)}
           />
         );
       })}
