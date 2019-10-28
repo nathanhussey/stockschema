@@ -2,6 +2,43 @@ import React, { useState, useEffect } from "react";
 import StockCardList from "../../components/stockCardList/StockCardList";
 import styled from "styled-components";
 
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  max-width: 84em;
+  margin-left: auto;
+  margin-right: auto;
+  flex-wrap: wrap;
+`;
+
+const FeatureList = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+const Title = styled.h1`
+  font-size: 14px;
+  width: 20em;
+  margin: 0px 10px 0px 10px;
+`;
+const LgSubTitle = styled.h2`
+  font-size: 12px;
+  width: 10em;
+  margin: 0px 10px 0px 10px;
+`;
+const SubTitle = styled.h2`
+  font-size: 12px;
+  width: 5em;
+  margin: 0px 10px 0px 10px;
+`;
+
+const Graph = styled.h2`
+  text-align: left;
+  font-size: 12px;
+  width: 110px;
+  margin: 0px 10px 0px 10px;
+`;
+
 const Homepage = () => {
   const [stockList, setStockList] = useState([]);
   //fetch company logo, company info, key stats and price
@@ -42,9 +79,17 @@ const Homepage = () => {
   }, []);
 
   return (
-    <div>
+    <Wrapper>
+      <FeatureList>
+        <Title>Company</Title>
+        <LgSubTitle>Market Cap</LgSubTitle>
+        <SubTitle>Price</SubTitle>
+        <LgSubTitle>Volume(24h)</LgSubTitle>
+        <LgSubTitle>Change(24h)</LgSubTitle>
+        <Graph>Graph(7d)</Graph>
+      </FeatureList>
       <StockCardList stockList={stockList} />
-    </div>
+    </Wrapper>
   );
 };
 

@@ -5,25 +5,29 @@ import styled from "styled-components";
 
 const Wrapper = styled.div`
   display: flex;
-  justify-content: space-around;
-  padding: 2em;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const Title = styled.h1`
   font-size: 14px;
-  margin: 1em;
-  max-width: 5em;
+  width: 20em;
+  margin: 0px 10px 0px 10px;
 `;
-
+const LgSubTitle = styled.h2`
+  font-size: 12px;
+  width: 10em;
+  margin: 0px 10px 0px 10px;
+`;
 const SubTitle = styled.h2`
   font-size: 12px;
-  margin: 1em;
-  max-width: 3em;
+  width: 5em;
+  margin: 0px 10px 0px 10px;
 `;
 
 const Logo = styled.img`
-  margin: 1em;
-  max-width: 3em;
+  margin: 0px 5px 0px 5px;
+  width: 3em;
 `;
 
 const StockCard = ({
@@ -37,11 +41,13 @@ const StockCard = ({
 }) => {
   return (
     <Wrapper>
-      <Logo alt="logo" src={logo} />
-      <Title>{name}</Title>
-      <SubTitle>{marketCap}</SubTitle>
+      <Title>
+        <Logo alt="logo" src={logo} />
+        {name}
+      </Title>
+      <LgSubTitle>{marketCap}</LgSubTitle>
       <SubTitle>{price}</SubTitle>
-      <SubTitle>{volume}</SubTitle>
+      <LgSubTitle>{volume}</LgSubTitle>
       <SubTitle>{priceChange}</SubTitle>
       <XYPlot height={100} width={200}>
         <LineSeries data={graph} />
