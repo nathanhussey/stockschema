@@ -2,22 +2,31 @@ import React, { useState, useEffect } from "react";
 import FinancialsTreemap from "../../components/financialsTreemapCard/FinancialsTreemapCard";
 
 const CompanyPage = () => {
-  const [info, setInfo] = useState();
+  const [info, setInfo] = useState("");
+  const [income, setIncome] = useState(false);
+  const [balanceSheet, setBalanceSheet] = useState(false);
+  const [cashFlow, setCashFlow] = useState(false);
   useEffect(() => {
     fetch(
       `https://sandbox.iexapis.com/stable/stock/aapl/batch?types=income,balance-sheet,cash-flow&period=annual&token=${process.env.REACT_APP_IEX_TOKEN}`
     )
       .then(response => response.json())
       .then(data => {
-        console.log(data);
         setInfo(data);
+
+        setIncome(data.income.income);
+        setBalanceSheet(data["balance-sheet"].balancesheet);
+        setCashFlow(data["cash-flow"].cashflow);
       });
   }, []);
 
-  const circlePackFormat = () => {};
   return (
     <div>
-      <FinancialsTreemap />
+      <FinancialsTreemap
+        income={income}
+        balanceSheet={balanceSheet}
+        cashFlow={cashFlow}
+      />
     </div>
   );
 };

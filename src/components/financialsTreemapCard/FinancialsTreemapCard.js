@@ -1,60 +1,114 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Treemap } from "react-vis";
 import "./FinancialsTreemapCard.scss";
 import styled from "styled-components";
 
+//top: ${props => props.hoverPosition[1]}px;
+//left: ${props => props.hoverPosition[0]}px;
 const ToolTip = styled.span`
-  position: absolute;
   top: ${props => props.hoverPosition[1]}px;
   left: ${props => props.hoverPosition[0]}px;
-  background-color: blueviolet;
   height: 80px;
   width: 200px;
+  position: absolute;
+  background-color: blueviolet;
 `;
 
+const Button = styled.button`
+  font-size: 18px;
+  margin: 1em;
+  border: none;
+`;
+
+const CirclePackStatements = styled.div`
+  display: flex;
+  justify-content: center;
+  max-width: 84em;
+  margin-left: auto;
+  margin-right: auto;
+  flex-wrap: wrap;
+`;
+
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+`;
 const FinancialsTreemapCard = ({ income, balanceSheet, cashFlow }) => {
-  const [statement, setStatement] = useState({
-    color: "#ffffff",
-    children: [
-      { title: "", color: "#005073", size: 3938 },
-      { title: "CommunityStructure", color: "#005073", size: 13812 },
-      { title: "HierarchicalCluster", color: "#005073", size: 6714 },
-      { title: "MergeEdge", color: "#005073", size: 743 },
-      { title: "BetweennessCentrality", color: "#107dac", size: 3534 },
-      { title: "LinkDistance", color: "#107dac", size: 5731 },
-      { title: "MaxFlowMinCut", color: "#107dac", size: 7840 },
-      { title: "ShortestPaths", color: "#107dac", size: 5914 },
-      { title: "SpanningTree", color: "#107dac", size: 3416 },
-      { title: "AspectRatioBanker", color: "	#189ad3", size: 7074 }
-    ]
-  });
   const [hoverPosition, setHoverPosition] = useState([]);
   const [hoverInfo, setHoverInfo] = useState("");
+  const [data, setData] = useState("");
+  const [renderGraph, setRenderGraph] = useState(false);
+  const [graphSizeX, setGraphSizeX] = useState(900);
+  const [graphSizeY, setGraphSizeY] = useState(900);
+  const [toolTip, setToolTip] = useState(false);
 
+  useEffect(() => {
+    if (!income === false) {
+      setData(income);
+      setRenderGraph(true);
+    }
+  }, [income]);
+
+  const circlePackFormat = x => {
+    if (!x === false) {
+      delete x[0]["reportDate"];
+      x = x[0];
+      let childrenArray = [];
+      for (let key in x) {
+        let obj = { title: key, color: "#12939A", size: x[key] };
+        childrenArray.push(obj);
+      }
+
+      x = { title: "", color: "#ffffff", children: childrenArray };
+      return x;
+    }
+    return x;
+  };
   return (
     <div>
-      <Treemap
-        colorType={"literal"}
-        mode={"circlePack"}
-        title={"Financials"}
-        width={500}
-        height={500}
-        data={statement}
-        onLeafMouseOver={leafNode => {
-          let positionX = leafNode.x - 100;
-          let positionY = leafNode.y - leafNode.r - 80;
-          console.log(leafNode);
-          setHoverInfo({
-            title: leafNode.data.title,
-            value: `$${leafNode.value}`
-          });
-          setHoverPosition([positionX, positionY]);
-        }}
-      ></Treemap>
-      <ToolTip hoverPosition={hoverPosition}>
-        <div>{hoverInfo.title}</div>
-        <div>{hoverInfo.value}</div>
-      </ToolTip>
+      <CirclePackStatements>
+        <Button>Income</Button>
+        <Button>Balance Sheet</Button>
+        <Button>Cash Flow</Button>
+
+        {renderGraph ? (
+          <Container>
+            <Treemap
+              colorType={"literal"}
+              mode={"circlePack"}
+              title={"Financials"}
+              width={graphSizeX}
+              height={graphSizeY}
+              data={circlePackFormat(data)}
+              onLeafMouseOver={leafNode => {
+                setToolTip(true);
+                let positionX =
+                  leafNode.x - (graphSizeX - 345) + window.innerWidth * 0.5;
+                let positionY = leafNode.y - leafNode.r;
+                console.log(leafNode.x - (graphSizeX - 50));
+                console.log(leafNode.x);
+                setHoverInfo({
+                  title: leafNode.data.title,
+                  value: `$${leafNode.value}`
+                });
+                setHoverPosition([positionX, positionY]);
+              }}
+              onLeafMouseOut={e => {
+                setHoverPosition([]);
+                setHoverInfo("");
+                setToolTip(false);
+              }}
+            ></Treemap>
+            {toolTip ? (
+              <ToolTip hoverPosition={hoverPosition}>
+                <div>{hoverInfo.title}</div>
+                <div>{hoverInfo.value}</div>
+              </ToolTip>
+            ) : null}
+          </Container>
+        ) : null}
+      </CirclePackStatements>
     </div>
   );
 };
