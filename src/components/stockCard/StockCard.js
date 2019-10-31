@@ -4,10 +4,16 @@ import { Link } from "react-router-dom";
 import "./StockCard.scss";
 import styled from "styled-components";
 
+//fix api for logo readd code
+//<Logo alt="logo" src={logo} />
+
 const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 1em;
+  box-shadow: 0px 0px 4px #4b4b4b;
+  border-radius: 10px;
 `;
 
 const Title = styled.h1`
@@ -44,7 +50,6 @@ const StockCard = ({
   return (
     <Wrapper>
       <Title>
-        <Logo alt="logo" src={logo} />
         <Link to={`/company-page/${symbol}`}>{name}</Link>
       </Title>
       <LgSubTitle>{marketCap}</LgSubTitle>

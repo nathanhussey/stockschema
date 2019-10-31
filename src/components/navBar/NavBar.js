@@ -11,11 +11,16 @@ const Nav = styled.div`
   margin-right: auto;
   flex-wrap: wrap;
 `;
+const Beta = styled.h1`
+  color: green;
+`;
 
 const NavBar = () => {
   return (
     <div>
-      <Nav></Nav>
+      <Nav>
+        <Beta>Currently in Beta - stock information is not accurate</Beta>
+      </Nav>
     </div>
   );
 };
