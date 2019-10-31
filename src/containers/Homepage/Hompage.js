@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import StockCardList from "../../components/stockCardList/StockCardList";
+import NavBar from "../../components/navBar/NavBar";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   max-width: 84em;
+  margin-top: 2em;
   margin-left: auto;
   margin-right: auto;
   flex-wrap: wrap;
@@ -14,6 +16,7 @@ const Wrapper = styled.div`
 const FeatureList = styled.div`
   display: flex;
   justify-content: space-between;
+  margin-bottom: 1em;
   align-items: center;
 `;
 const Title = styled.h1`
@@ -73,23 +76,25 @@ const Homepage = () => {
         const arrayOfData = Object.entries(data).map(e => {
           return e[1];
         });
-        console.log(arrayOfData);
         setStockList(arrayOfData);
       });
   }, []);
-
+  console.log(stockList);
   return (
-    <Wrapper>
-      <FeatureList>
-        <Title>Company</Title>
-        <LgSubTitle>Market Cap</LgSubTitle>
-        <SubTitle>Price</SubTitle>
-        <LgSubTitle>Volume(24h)</LgSubTitle>
-        <LgSubTitle>Change(24h)</LgSubTitle>
-        <Graph>Graph(7d)</Graph>
-      </FeatureList>
-      <StockCardList stockList={stockList} />
-    </Wrapper>
+    <div>
+      <NavBar></NavBar>
+      <Wrapper>
+        <FeatureList>
+          <Title>Company</Title>
+          <LgSubTitle>Market Cap</LgSubTitle>
+          <SubTitle>Price</SubTitle>
+          <LgSubTitle>Volume(24h)</LgSubTitle>
+          <LgSubTitle>Change(24h)</LgSubTitle>
+          <Graph>Graph(7d)</Graph>
+        </FeatureList>
+        <StockCardList stockList={stockList} />
+      </Wrapper>
+    </div>
   );
 };
 

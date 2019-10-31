@@ -1,5 +1,6 @@
 import React from "react";
 import { XYPlot, LineSeries } from "react-vis";
+import { Link } from "react-router-dom";
 import "./StockCard.scss";
 import styled from "styled-components";
 
@@ -33,6 +34,7 @@ const Logo = styled.img`
 const StockCard = ({
   logo,
   name,
+  symbol,
   marketCap,
   price,
   volume,
@@ -43,7 +45,7 @@ const StockCard = ({
     <Wrapper>
       <Title>
         <Logo alt="logo" src={logo} />
-        {name}
+        <Link to={`/company-page/${symbol}`}>{name}</Link>
       </Title>
       <LgSubTitle>{marketCap}</LgSubTitle>
       <SubTitle>{price}</SubTitle>

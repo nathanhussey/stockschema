@@ -11,12 +11,13 @@ const ToolTip = styled.span`
   height: 80px;
   width: 200px;
   position: absolute;
-  background-color: blueviolet;
+  background-color: #fafafa;
+  box-shadow: 0px 0px 5px #4b4b4b;
 `;
 
 const Button = styled.button`
   font-size: 18px;
-  margin: 1em;
+  margin: 4em 2em 1em 2em;
   border: none;
 `;
 
@@ -56,20 +57,87 @@ const FinancialsTreemapCard = ({ income, balanceSheet, cashFlow }) => {
 
   const circlePackFormat = x => {
     if (!x === false) {
+      console.log(x);
       delete x[0]["reportDate"];
       x = x[0];
       let childrenArray = [];
+      const postiveValue = [
+        "currentCash",
+        "shortTermInvestments",
+        "receivables",
+        "inventory",
+        "otherCurrentAssets",
+        "currentAssets",
+        "longTermInvestments",
+        "propertyPlantEquipment",
+        "goodwill",
+        "intangibleAssets",
+        "otherAssets",
+        "totalAssets",
+        "totalRevenue",
+        "grossProfit",
+        "operatingIncome",
+        "otherIncomeExpenseNet",
+        "ebit",
+        "pretaxIncome",
+        "netIncome",
+        "netIncomeBasic",
+        "cashFlow"
+      ];
+      const negativeValue = [
+        "accountsPayable",
+        "currentLongTermDebt",
+        "otherCurrentLiabilities",
+        "totalCurrentLiabilities",
+        "longTermDebt",
+        "otherLiabilities",
+        "minorityInterest",
+        "totalLiabilities",
+        "costOfRevenue",
+        "researchAndDevelopment",
+        "sellingGeneralAndAdmin",
+        "operatingExpense",
+        "interestIncome",
+        "incomeTax",
+        "minorityInterest"
+      ];
+      const neutralValue = [
+        "commonStock",
+        "retainedEarnings",
+        "treasuryStock",
+        "capitalSurplus",
+        "shareholderEquity",
+        "netTangibleAssets"
+      ];
+      const colorType = {
+        positive: "#84AF9B",
+        negative: "#E4B7B2",
+        neutral: "#FFFBDD",
+        default: "#9DC8DD"
+      };
+
+      // setting color based on title
       for (let key in x) {
-        let obj = { title: key, color: "#12939A", size: x[key] };
-        childrenArray.push(obj);
+        if (postiveValue.includes(key)) {
+          let obj = { title: key, color: colorType.positive, size: x[key] };
+          childrenArray.push(obj);
+        } else if (negativeValue.includes(key)) {
+          let obj = { title: key, color: colorType.negative, size: x[key] };
+          childrenArray.push(obj);
+        } else if (neutralValue.includes(key)) {
+          let obj = { title: key, color: colorType.neutral, size: x[key] };
+          childrenArray.push(obj);
+        } else {
+          let obj = { title: key, color: colorType.default, size: x[key] };
+          childrenArray.push(obj);
+        }
       }
 
       x = { title: "", color: "#ffffff", children: childrenArray };
       return x;
     }
-    return x;
   };
-  console.log(income);
+
   return (
     <div>
       <CirclePackStatements>

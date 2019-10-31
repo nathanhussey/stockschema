@@ -39,6 +39,9 @@ const StockCardList = ({ stockList }) => {
     let newNum = `$${joinArrayStr}`;
     return newNum;
   };
+
+  console.log(stockList);
+
   return (
     <div>
       {stockList.map((stock, i) => {
@@ -47,6 +50,7 @@ const StockCardList = ({ stockList }) => {
             key={stock.company.symbol}
             logo={stock.logo}
             name={stock.company.companyName}
+            symbol={stock.company.symbol}
             marketCap={formatNum(stock.stats.marketcap)}
             price={formatNum(stock.price)}
             volume={formatNum(stock.chart[4].uVolume)}
