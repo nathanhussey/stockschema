@@ -12,8 +12,13 @@ const Wrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1em;
+  margin-left: 1em;
+  margin-right: 1em;
   box-shadow: 0px 0px 4px #4b4b4b;
   border-radius: 10px;
+  @media (max-width: 650px) {
+    width: max-content;
+  }
 `;
 
 const Title = styled.h1`

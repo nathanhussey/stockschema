@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import StockCardList from "../../components/stockCardList/StockCardList";
 import NavBar from "../../components/navBar/NavBar";
 import styled from "styled-components";
+import Scroll from "../../components/scroll/Scroll";
 
 const Wrapper = styled.div`
   display: flex;
@@ -84,15 +85,17 @@ const Homepage = () => {
     <div>
       <NavBar></NavBar>
       <Wrapper>
-        <FeatureList>
-          <Title>Company</Title>
-          <LgSubTitle>Market Cap</LgSubTitle>
-          <SubTitle>Price</SubTitle>
-          <LgSubTitle>Volume(24h)</LgSubTitle>
-          <LgSubTitle>Change(24h)</LgSubTitle>
-          <Graph>Graph(7d)</Graph>
-        </FeatureList>
-        <StockCardList stockList={stockList} />
+        <Scroll>
+          <FeatureList>
+            <Title>Company</Title>
+            <LgSubTitle>Market Cap</LgSubTitle>
+            <SubTitle>Price</SubTitle>
+            <LgSubTitle>Volume(24h)</LgSubTitle>
+            <LgSubTitle>Change(24h)</LgSubTitle>
+            <Graph>Graph(7d)</Graph>
+          </FeatureList>
+          <StockCardList stockList={stockList} />
+        </Scroll>
       </Wrapper>
     </div>
   );
