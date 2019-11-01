@@ -164,7 +164,7 @@ const FinancialsTreemapCard = ({ income, balanceSheet, cashFlow }) => {
               onLeafMouseOver={leafNode => {
                 setToolTip(true);
                 let positionX =
-                  leafNode.x - (graphSizeX - 345) + window.innerWidth * 0.5;
+                  leafNode.x - (graphSizeX - 370) + window.innerWidth * 0.5;
                 let positionY = leafNode.y + 80 - leafNode.r;
                 console.log(leafNode.r);
                 if (leafNode.parent === null) {
