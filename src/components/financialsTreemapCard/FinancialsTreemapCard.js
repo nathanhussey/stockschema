@@ -41,10 +41,10 @@ const FinancialsTreemapCard = ({ income, balanceSheet, cashFlow }) => {
   const [hoverInfo, setHoverInfo] = useState("");
   const [data, setData] = useState("");
   const [renderGraph, setRenderGraph] = useState(false);
-  const [graphSizeX, setGraphSizeX] = useState(900);
-  const [graphSizeY, setGraphSizeY] = useState(900);
+  const [graphSizeX, setGraphSizeX] = useState(window.innerWidth);
+  const [graphSizeY, setGraphSizeY] = useState(window.innerHeight);
   const [toolTip, setToolTip] = useState(false);
-
+  console.log(window.innerWidth);
   useEffect(() => {
     if (!income === false) {
       setData(income);
@@ -143,11 +143,13 @@ const FinancialsTreemapCard = ({ income, balanceSheet, cashFlow }) => {
   return (
     <div>
       <CirclePackStatements>
-        <Button onClick={() => handleGraphChange(income)}>Income</Button>
-        <Button onClick={() => handleGraphChange(balanceSheet)}>
-          Balance Sheet{" "}
-        </Button>
-        <Button onClick={() => handleGraphChange(cashFlow)}>Cash Flow</Button>
+        <Container>
+          <Button onClick={() => handleGraphChange(income)}>Income</Button>
+          <Button onClick={() => handleGraphChange(balanceSheet)}>
+            Balance Sheet{" "}
+          </Button>
+          <Button onClick={() => handleGraphChange(cashFlow)}>Cash Flow</Button>
+        </Container>
 
         {renderGraph ? (
           <Container>
