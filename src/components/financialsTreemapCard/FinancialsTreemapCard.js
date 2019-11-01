@@ -8,11 +8,12 @@ import styled from "styled-components";
 const ToolTip = styled.span`
   top: ${props => props.hoverPosition[1]}px;
   left: ${props => props.hoverPosition[0]}px;
-  height: 80px;
+  height: auto;
   width: 200px;
   position: absolute;
   background-color: #fafafa;
   box-shadow: 0px 0px 5px #4b4b4b;
+  border-radius: 4px;
 `;
 
 const Button = styled.button`
@@ -55,6 +56,7 @@ const FinancialsTreemapCard = ({ income, balanceSheet, cashFlow }) => {
     setData(e);
   };
 
+  //formats data so it it can be used in circlePack
   const circlePackFormat = x => {
     if (!x === false) {
       console.log(x);
@@ -161,8 +163,8 @@ const FinancialsTreemapCard = ({ income, balanceSheet, cashFlow }) => {
                 setToolTip(true);
                 let positionX =
                   leafNode.x - (graphSizeX - 345) + window.innerWidth * 0.5;
-                let positionY = leafNode.y - leafNode.r;
-                console.log(leafNode);
+                let positionY = leafNode.y + 80 - leafNode.r;
+                console.log(leafNode.r);
                 if (leafNode.parent === null) {
                   setToolTip(false);
                 } else {
