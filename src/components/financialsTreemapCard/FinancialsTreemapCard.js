@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Treemap } from "react-vis";
 import "./FinancialsTreemapCard.scss";
 import styled from "styled-components";
+import classNames from "classnames";
+import borders from "react-vis/dist/plot/borders";
 
 //top: ${props => props.hoverPosition[1]}px;
 //left: ${props => props.hoverPosition[0]}px;
@@ -140,15 +142,36 @@ const FinancialsTreemapCard = ({ income, balanceSheet, cashFlow }) => {
     }
   };
 
+  const selected = {
+    color: "blue",
+    borderBottom: "solid"
+  };
+  const notSelected = {
+    color: "black"
+  };
+
   return (
     <div>
       <CirclePackStatements>
         <Container>
-          <Button onClick={() => handleGraphChange(income)}>Income</Button>
-          <Button onClick={() => handleGraphChange(balanceSheet)}>
+          <Button
+            onClick={() => handleGraphChange(income)}
+            style={data === income ? selected : notSelected}
+          >
+            Income
+          </Button>
+          <Button
+            onClick={() => handleGraphChange(balanceSheet)}
+            style={data === balanceSheet ? selected : notSelected}
+          >
             Balance Sheet{" "}
           </Button>
-          <Button onClick={() => handleGraphChange(cashFlow)}>Cash Flow</Button>
+          <Button
+            onClick={() => handleGraphChange(cashFlow)}
+            style={data === cashFlow ? selected : notSelected}
+          >
+            Cash Flow
+          </Button>
         </Container>
 
         {renderGraph ? (
