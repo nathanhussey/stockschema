@@ -32,13 +32,34 @@ const CirclePackStatements = styled.div`
   margin-right: auto;
   flex-wrap: wrap;
 `;
-
+const Title = styled.div`
+  font-size: 2em;
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  justify-content: center;
+  max-width: 84em;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2em;
+  flex-wrap: wrap;
+`;
 const Container = styled.div`
   display: flex;
+  position: relative;
   justify-content: center;
   width: 100%;
 `;
-const FinancialsTreemapCard = ({ income, balanceSheet, cashFlow }) => {
+const TreeContainer = styled.div`
+  display: flex;
+  position: relative;
+  justify-content: center;
+`;
+const FinancialsTreemapCard = ({
+  income,
+  balanceSheet,
+  cashFlow,
+  companyName
+}) => {
   const [hoverPosition, setHoverPosition] = useState([]);
   const [hoverInfo, setHoverInfo] = useState("");
   const [data, setData] = useState("");
@@ -46,7 +67,7 @@ const FinancialsTreemapCard = ({ income, balanceSheet, cashFlow }) => {
   const [graphSizeX, setGraphSizeX] = useState(window.innerWidth);
   const [graphSizeY, setGraphSizeY] = useState(window.innerHeight);
   const [toolTip, setToolTip] = useState(false);
-  console.log(window.innerWidth);
+  console.log(data);
   useEffect(() => {
     if (!income === false) {
       setData(income);
@@ -149,9 +170,10 @@ const FinancialsTreemapCard = ({ income, balanceSheet, cashFlow }) => {
   const notSelected = {
     color: "black"
   };
-
+  console.log(companyName);
   return (
     <div>
+      <Title>{companyName}</Title>
       <CirclePackStatements>
         <Container>
           <Button
@@ -175,7 +197,7 @@ const FinancialsTreemapCard = ({ income, balanceSheet, cashFlow }) => {
         </Container>
 
         {renderGraph ? (
-          <Container>
+          <TreeContainer>
             <Treemap
               animation={true}
               colorType={"literal"}
@@ -186,10 +208,9 @@ const FinancialsTreemapCard = ({ income, balanceSheet, cashFlow }) => {
               data={circlePackFormat(data)}
               onLeafMouseOver={leafNode => {
                 setToolTip(true);
-                let positionX =
-                  leafNode.x - (graphSizeX - 370) + window.innerWidth * 0.5;
-                let positionY = leafNode.y + 80 - leafNode.r;
-                console.log(leafNode.r);
+                let positionX = leafNode.x - 100;
+                let positionY = leafNode.y - leafNode.r;
+
                 if (leafNode.parent === null) {
                   setToolTip(false);
                 } else {
@@ -212,7 +233,7 @@ const FinancialsTreemapCard = ({ income, balanceSheet, cashFlow }) => {
                 <div>{hoverInfo.value}</div>
               </ToolTip>
             ) : null}
-          </Container>
+          </TreeContainer>
         ) : null}
       </CirclePackStatements>
     </div>
