@@ -1,27 +1,51 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 const Nav = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
   max-width: 84em;
-  height: 4em;
-  margin-top: 2em;
-  margin-left: auto;
-  margin-right: auto;
+  height: 5em;
+  background-color: #8acb88;
   flex-wrap: wrap;
 `;
 const Beta = styled.h1`
-  color: green;
+  margin: 0;
+  color: black;
+`;
+const SearchBar = styled.input`
+  visibility: hidden;
+  height: 3em;
+  width: 15em;
+  border-radius: 5px;
+`;
+
+const SearchButton = styled.button`
+  visibility: hidden;
+`;
+
+const Login = styled.button`
+  visibility: hidden;
+`;
+const SignUp = styled.button`
+  visibility: hidden;
 `;
 
 const NavBar = () => {
+  const [searchInput, setSearchInput] = useState();
   return (
-    <div>
-      <Nav>
-        <Beta>Currently in Beta - stock information is not accurate</Beta>
-      </Nav>
-    </div>
+    <Nav>
+      <Beta>Beta</Beta>
+      <div>
+        <SearchBar></SearchBar>
+        <SearchButton>Button</SearchButton>
+      </div>
+      <div>
+        <Login />
+        <SignUp />
+      </div>
+    </Nav>
   );
 };
 

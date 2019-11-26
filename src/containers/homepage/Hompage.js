@@ -83,7 +83,6 @@ const Homepage = () => {
   console.log(stockList);
   return (
     <div>
-      <NavBar></NavBar>
       <Wrapper>
         <Scroll>
           <FeatureList>

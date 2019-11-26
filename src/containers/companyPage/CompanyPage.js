@@ -19,7 +19,8 @@ const CompanyPage = ({ match }) => {
         setIncome(data.income.income);
         setBalanceSheet(data["balance-sheet"].balancesheet);
         setCashFlow(data["cash-flow"].cashflow);
-      });
+      })
+      .catch("the error");
   }, []);
 
   return (
