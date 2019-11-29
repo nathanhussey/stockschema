@@ -3,6 +3,7 @@ import StockCardList from "../../components/stockCardList/StockCardList";
 import NavBar from "../../components/navBar/NavBar";
 import styled from "styled-components";
 import Scroll from "../../components/scroll/Scroll";
+import RecentStocks from "../recentStocks/RecentStocks";
 
 const Wrapper = styled.div`
   display: flex;

@@ -3,13 +3,18 @@ import styled from "styled-components";
 import { Redirect, withRouter } from "react-router-dom";
 
 const Nav = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 84em;
+  width: auto;
   height: 5em;
   background-color: #8acb88;
   flex-wrap: wrap;
+`;
+const Content = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 72em;
+  padding: 1.1em 0 0 0;
+  margin: auto;
 `;
 const Beta = styled.h1`
   margin: 0 0.5em;
@@ -92,22 +97,24 @@ const NavBar = ({ history }) => {
 
   return (
     <Nav>
-      <Beta onClick={handleClickLogo}>Beta</Beta>
-      <SearchDiv>
-        {errorMessage}
-        <SearchBar
-          type="text"
-          onKeyDown={keyPress}
-          placeholder="Search Ticker..."
-          value={searchInput}
-          onChange={handleSearchChange}
-        ></SearchBar>
-        <SearchButton onClick={handleSearchButton}>Search</SearchButton>
-      </SearchDiv>
-      <div>
-        <Login />
-        <SignUp />
-      </div>
+      <Content>
+        <Beta onClick={handleClickLogo}>Beta</Beta>
+        <SearchDiv>
+          {errorMessage}
+          <SearchBar
+            type="text"
+            onKeyDown={keyPress}
+            placeholder="Search Ticker..."
+            value={searchInput}
+            onChange={handleSearchChange}
+          ></SearchBar>
+          <SearchButton onClick={handleSearchButton}>Search</SearchButton>
+        </SearchDiv>
+        <div>
+          <Login />
+          <SignUp />
+        </div>
+      </Content>
     </Nav>
   );
 };
