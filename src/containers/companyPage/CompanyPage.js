@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import FinancialsTreemap from "../../components/financialsTreemapCard/FinancialsTreemapCard";
+import NavBar from "../../components/navBar/NavBar";
 
 const CompanyPage = ({ match }) => {
   const [info, setInfo] = useState("");
@@ -20,11 +21,12 @@ const CompanyPage = ({ match }) => {
         setBalanceSheet(data["balance-sheet"].balancesheet);
         setCashFlow(data["cash-flow"].cashflow);
       })
-      .catch("the error");
-  }, []);
+      .catch(error => "the error");
+  }, [match]);
 
   return (
     <div>
+      <NavBar />
       <FinancialsTreemap
         income={income}
         balanceSheet={balanceSheet}

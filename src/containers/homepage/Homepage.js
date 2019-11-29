@@ -78,11 +78,13 @@ const Homepage = () => {
           return e[1];
         });
         setStockList(arrayOfData);
-      });
+      })
+      .catch(console.log("fetching error"));
   }, []);
   console.log(stockList);
   return (
     <div>
+      <NavBar />
       <Wrapper>
         <Scroll>
           <FeatureList>
