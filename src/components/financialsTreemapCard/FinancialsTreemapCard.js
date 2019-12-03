@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Treemap } from "react-vis";
 import "./FinancialsTreemapCard.scss";
 import styled from "styled-components";
-import classNames from "classnames";
 import borders from "react-vis/dist/plot/borders";
 
 //top: ${props => props.hoverPosition[1]}px;
@@ -67,7 +66,6 @@ const FinancialsTreemapCard = ({
   const [graphSizeX, setGraphSizeX] = useState(window.innerWidth);
   const [graphSizeY, setGraphSizeY] = useState(window.innerHeight);
   const [toolTip, setToolTip] = useState(false);
-  console.log(data);
   useEffect(() => {
     if (!income === false) {
       setData(income);
@@ -170,7 +168,6 @@ const FinancialsTreemapCard = ({
   const notSelected = {
     color: "black"
   };
-  console.log(companyName);
   return (
     <div>
       <Title>{companyName}</Title>

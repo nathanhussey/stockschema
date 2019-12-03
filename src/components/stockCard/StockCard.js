@@ -55,7 +55,7 @@ const StockCard = ({
   return (
     <Wrapper>
       <Title>
-        <Link to={`/company-page/${symbol}`}>{name}</Link>
+        <Link to={`/company-page/${symbol}/${name}`}>{name}</Link>
       </Title>
       <LgSubTitle>{marketCap}</LgSubTitle>
       <SubTitle>{price}</SubTitle>

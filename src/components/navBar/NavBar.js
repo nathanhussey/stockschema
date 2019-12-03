@@ -61,13 +61,13 @@ const NavBar = ({ history }) => {
   const handleSearchButton = () => {
     //fetch from api
     fetch(
-      `https://sandbox.iexapis.com/stable/stock/${searchInput}/price/?token=${process.env.REACT_APP_IEX_TOKEN}`
+      `https://sandbox.iexapis.com/stable/stock/${searchInput}/company/?token=${process.env.REACT_APP_IEX_TOKEN}`
     )
       //if ticker exists redirect to company page
       .then(response => response.json())
       .then(data => {
         console.log(data);
-        history.push(`/company-page/${searchInput}`);
+        history.push(`/company-page/${searchInput}/${data}`);
       })
       //if not return this is an invalid ticker
       .catch(err => {

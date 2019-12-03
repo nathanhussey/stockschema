@@ -1,4 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  setRecentStocksReducer,
+  subtractRecentStock
+} from "../recentStocksList/actions";
 import FinancialsTreemap from "../../components/financialsTreemapCard/FinancialsTreemapCard";
 import NavBar from "../../components/navBar/NavBar";
 
@@ -8,6 +13,7 @@ const CompanyPage = ({ match }) => {
   const [balanceSheet, setBalanceSheet] = useState(false);
   const [cashFlow, setCashFlow] = useState(false);
   const [companyInfo, setCompanyInfo] = useState(false);
+  console.log(match);
   useEffect(() => {
     fetch(
       `https://sandbox.iexapis.com/stable/stock/${match.params.symbol}/batch?types=company,income,balance-sheet,cash-flow&period=annual&token=${process.env.REACT_APP_IEX_TOKEN}`
@@ -21,9 +27,37 @@ const CompanyPage = ({ match }) => {
         setBalanceSheet(data["balance-sheet"].balancesheet);
         setCashFlow(data["cash-flow"].cashflow);
       })
+      .then(data1 => {
+        if (
+          recentStocks.some(stock => {
+            console.log("1");
+            return stock.ticker === match.params.symbol;
+          })
+        ) {
+        } else if (recentStocks.length === 5) {
+          console.log("2");
+          dispatch(
+            subtractRecentStock({
+              ticker: match.params.symbol,
+              name: match.params.name
+            })
+          );
+        } else {
+          console.log("");
+          dispatch(
+            setRecentStocksReducer({
+              ticker: match.params.symbol,
+              name: match.params.name
+            })
+          );
+        }
+      })
+
       .catch(error => "the error");
   }, [match]);
 
+  const dispatch = useDispatch();
+  const recentStocks = useSelector(state => state.recentStocks);
   return (
     <div>
       <NavBar />

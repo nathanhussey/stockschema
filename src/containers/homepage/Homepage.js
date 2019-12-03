@@ -3,7 +3,7 @@ import StockCardList from "../../components/stockCardList/StockCardList";
 import NavBar from "../../components/navBar/NavBar";
 import styled from "styled-components";
 import Scroll from "../../components/scroll/Scroll";
-import RecentStocks from "../recentStocks/RecentStocks";
+import RecentStocksList from "../recentStocksList/RecentStocksList";
 
 const Wrapper = styled.div`
   display: flex;
@@ -12,7 +12,7 @@ const Wrapper = styled.div`
   margin-top: 2em;
   margin-left: auto;
   margin-right: auto;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 `;
 
 const FeatureList = styled.div`
@@ -87,6 +87,7 @@ const Homepage = () => {
     <div>
       <NavBar />
       <Wrapper>
+        <RecentStocksList />
         <Scroll>
           <FeatureList>
             <Title>Company</Title>
