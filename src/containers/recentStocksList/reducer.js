@@ -6,7 +6,9 @@ const recentStocksReducer = (state = [], action) => {
     case ADD_STOCK:
       return [...state, action.payload];
     case SUBTRACT_STOCK:
-      return [...state, action.payload];
+      let newArray = state.slice();
+      newArray.splice(0, 1);
+      return [...newArray, action.payload];
     default:
       return state;
   }

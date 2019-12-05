@@ -13,7 +13,7 @@ const CompanyPage = ({ match }) => {
   const [balanceSheet, setBalanceSheet] = useState(false);
   const [cashFlow, setCashFlow] = useState(false);
   const [companyInfo, setCompanyInfo] = useState(false);
-  console.log(match);
+
   useEffect(() => {
     fetch(
       `https://sandbox.iexapis.com/stable/stock/${match.params.symbol}/batch?types=company,income,balance-sheet,cash-flow&period=annual&token=${process.env.REACT_APP_IEX_TOKEN}`
@@ -30,12 +30,11 @@ const CompanyPage = ({ match }) => {
       .then(data1 => {
         if (
           recentStocks.some(stock => {
-            console.log("1");
             return stock.ticker === match.params.symbol;
           })
         ) {
         } else if (recentStocks.length === 5) {
-          console.log("2");
+          console.log(match.params);
           dispatch(
             subtractRecentStock({
               ticker: match.params.symbol,
@@ -43,7 +42,7 @@ const CompanyPage = ({ match }) => {
             })
           );
         } else {
-          console.log("");
+          console.log(match.params);
           dispatch(
             setRecentStocksReducer({
               ticker: match.params.symbol,

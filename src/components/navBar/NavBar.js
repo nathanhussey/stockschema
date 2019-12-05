@@ -55,7 +55,6 @@ const SignUp = styled.button`
 
 const NavBar = ({ history }) => {
   const [searchInput, setSearchInput] = useState("");
-  const [redirectPage, setRedirectPage] = useState("");
   const [invalidMessage, setInvalidMessage] = useState(false);
 
   const handleSearchButton = () => {
@@ -67,7 +66,7 @@ const NavBar = ({ history }) => {
       .then(response => response.json())
       .then(data => {
         console.log(data);
-        history.push(`/company-page/${searchInput}/${data}`);
+        history.push(`/company-page/${searchInput}/${data.companyName}`);
       })
       //if not return this is an invalid ticker
       .catch(err => {
