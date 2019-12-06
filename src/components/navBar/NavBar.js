@@ -97,7 +97,7 @@ const NavBar = ({ history }) => {
   return (
     <Nav>
       <Content>
-        <Beta onClick={handleClickLogo}>Beta</Beta>
+        <Beta onClick={handleClickLogo}>Stock Schema (Beta)</Beta>
         <SearchDiv>
           {errorMessage}
           <SearchBar
